@@ -7,7 +7,7 @@ public class NavMeshPlayer : MonoBehaviour
 {
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private Camera mainCam;
-
+    [SerializeField] private Transform barrel;
     void Start()
     {
     }
@@ -23,7 +23,20 @@ public class NavMeshPlayer : MonoBehaviour
             {
                 Debug.Log(hit.point);
                 agent.SetDestination(hit.point);
+                
             }
         }
+        if (Input.GetButton("Fire2"))
+        {
+            fire();
+        }
+    }
+
+    void fire()
+    {
+        
+        GameObject bullet = PoolingController.getInstance().GetBullet();
+        bullet.GetComponent<BulletScript>().Fire(barrel);        
+        
     }
 }
